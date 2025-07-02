@@ -1,0 +1,53 @@
+
+
+body
+{
+	background-image: url("123g.png");
+	background-attachment: fixed;
+	border-left: 1px solid red;
+	margin: auto 10%;
+	position: absolute;
+	height: 100%
+}
+
+body a
+{
+	color: black;
+	text-decoration:none;
+	font-style: Snell Roundhand, cursive;
+
+}
+
+.postit {
+  width: 130px;
+  height: 130px;
+  background: #fff9c4; /* Jaune pastel */
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+  border-radius: 8px;
+  margin: 1rem;
+  padding: 1rem;
+  font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand", cursive;
+  /*font-family: 'Comic Neue', 'Segoe UI', sans-serif;*/
+  font-size: 26px;
+  position: relative;
+  transform: rotate(-2deg);
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.postit:hover {
+  transform: rotate(0deg) scale(1.05);
+  background: #fff59d;
+}
+
+.caca {
+  display: flex;
+  flex-wrap: wrap; /* Pour que ça passe à la ligne si besoin */
+  justify-content: center; /* Centrer horizontalement */
+  gap: 1rem; /* Petit espace entre les post-its */
+  margin: 2rem auto;
+  max-width: 900px;
+}
