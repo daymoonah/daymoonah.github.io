@@ -187,3 +187,15 @@ nav {
 .liste-recettes {
   margin: 1rem;
 }
+
+.recette-item {
+  margin-bottom: 1rem; /* Espace entre les titres */
+  cursor: pointer;
+  padding: 0.5rem;
+  border-bottom: 1px dashed #ccc;
+  transition: background 0.2s;
+}
+
+.recette-item:hover {
+  background-color: #f2f2f2;
+}
