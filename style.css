@@ -6,11 +6,16 @@
 body {
   margin: 0 10%;  /* margin gauche et droite comme tu veux */
   padding-top: 10px; /* ou la marge haute que tu veux */
-  position: relative; /* si tu as besoin d’un contexte positionné */
+  /*position: relative; /* si tu as besoin d’un contexte positionné */
   border-left: 1px solid red;
   min-height: 100vh; /* pour qu’il prenne au moins toute la hauteur de la fenêtre */
   background-image: url("123g.png");
   background-attachment: fixed;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* centre horizontalement */
+  align-items: center;       /* centre verticalement */
 }
 
 body a
@@ -89,7 +94,7 @@ nav {
 
 .intercalaires {
   position: fixed;
-  top: 20%;
+  top: 40%;
   right: 10%;
   display: flex;
   flex-direction: column;
@@ -121,7 +126,6 @@ nav {
   font-family: "Segoe Print", "Comic Sans MS", "Bradley Hand", cursive;
   padding: 2rem;
   width: 80%;
-  margin-left: 10%;
   margin: 3rem auto;
   border: 15px solid #5a3e1b; /* couleur bois */
   border-bottom: 30px solid #5a3e1b;
@@ -136,4 +140,32 @@ nav {
   text-shadow:
     0 0 2px #fff,
     0 0 5px #fff;
+}
+
+.tabetca{
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+}
+
+
+.moncahier{
+  display: flex;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  border: 1px solid black;
+  border-top-right-radius: 35px 35px;
+  border-bottom-right-radius: 35px 35px;
+  height: 400px;
+  width: 50%;
+  margin: 3rem;
+  background: white;
+}
+
+.spiralette{
+  background: url(spirale.gif) 10px 0px repeat-y;
+  width: 55px;
+}
+
+.moncontenu{
+  margin: 1rem;
 }
