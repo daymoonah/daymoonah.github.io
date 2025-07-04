@@ -23,7 +23,7 @@ fetch('recette.json')
   });
 
   function afficherRecette(recette) {
-  const tableau = document.getElementById('tabkeau');
+  const tabkeau = document.getElementById('tabkeau');
   tabkeau.innerHTML = `
     <h2>${recette.titre}</h2>
     <h3>Ingrédients</h3>
