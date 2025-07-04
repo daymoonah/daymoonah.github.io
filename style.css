@@ -173,13 +173,17 @@ nav {
   margin: 1rem;
 }
 
-.liste-recettes {
+.laliste{
   max-height: 400px; /* hauteur visible max */
   width: 30%;
   overflow-y: auto;  /* ascenseur vertical uniquement si besoin */
   border: 1px solid #ccc;
-  margin: 3rem;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  margin: 3rem;
+}
+
+.liste-recettes {
+  margin: 1rem;
 }
