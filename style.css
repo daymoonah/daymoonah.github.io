@@ -175,7 +175,7 @@ nav {
 
 .laliste{
   max-height: 400px; /* hauteur visible max */
-  width: 30%;
+  width: 40%;
   overflow-y: auto;  /* ascenseur vertical uniquement si besoin */
   border: 1px solid #ccc;
   background: #fff;
