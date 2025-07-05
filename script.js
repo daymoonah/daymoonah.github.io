@@ -4,19 +4,19 @@ fetch('recette.json')
     const recettes = data.recette;
     const liste = document.getElementById('liste-recettes');
 
-    recettes.forEach(recette => {
-      const item = document.createElement('div');
-      item.textContent = recette.titre;
-      item.classList.add('recette-item');
+    recettes
+  .sort((a, b) => a.titre.localeCompare(b.titre))  // <- ici le tri
+  .forEach(recette => {
+    const item = document.createElement('div');
+    item.textContent = recette.titre;
+    item.classList.add('recette-item');
 
-      // Clique sur une recette pour l’afficher (fonction à faire)
-      item.addEventListener('click', () => {
-        afficherRecette(recette);
-      });
-
-      liste.appendChild(item);
+    item.addEventListener('click', () => {
+      afficherRecette(recette);
     });
-  })
+
+    liste.appendChild(item);
+  });
 
   .catch(error => {
     console.error("Erreur lors du chargement du JSON :", error);
