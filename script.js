@@ -35,9 +35,9 @@ fetch('recette.json')
   `;
 
   // Pareil pour ton cahier si tu veux afficher "à_acheter"
-  const cahier = document.getElementById('cahier');
-  if (cahier) {
-    cahier.innerHTML = `
+  const moncontenu = document.getElementById('moncontenu');
+  if (moncontenu) {
+    moncontenu.innerHTML = `
       <h3>À acheter</h3>
       <ul>
         ${recette.a_acheter.map(i => `<li>${i}</li>`).join('') || '<li>À compléter</li>'}
