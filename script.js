@@ -5,7 +5,7 @@ fetch('recette.json')
     const liste = document.getElementById('liste-recettes');
 
     recettes
-  .sort((a, b) => a.titre.localeCompare(b.titre))  // <- ici le tri
+  .sort((a, b) => a.titre.localeCompare(b.titre));  // <- ici le tri
   .forEach(recette => {
     const item = document.createElement('div');
     item.textContent = recette.titre;
