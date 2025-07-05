@@ -5,38 +5,42 @@ fetch('recette.json')
     const liste = document.getElementById('liste-recettes');
 
     recettes
-  .sort((a, b) => a.titre.localeCompare(b.titre));  // <- ici le tri
-  .forEach(recette => {
-    const item = document.createElement('div');
-    item.textContent = recette.titre;
-    item.classList.add('recette-item');
+      .sort((a, b) => a.titre.localeCompare(b.titre))
+      .forEach(recette => {
+        const item = document.createElement('div');
+        item.textContent = recette.titre;
+        item.classList.add('recette-item');
 
-    item.addEventListener('click', () => {
-      afficherRecette(recette);
-    });
+        item.addEventListener('click', () => {
+          afficherRecette(recette);
+        });
 
-    liste.appendChild(item);
+        liste.appendChild(item);
+      });
+  })
+  .catch(error => {
+    console.error("Erreur lors du chargement du JSON :", error);
   });
 
-  function afficherRecette(recette) {
+// 🟢 Fonction déplacée ici, hors du fetch
+function afficherRecette(recette) {
   const takleau = document.getElementById('takleau');
   takleau.innerHTML = `
     <h2>${recette.titre}</h2>
     <h3>Ingrédients</h3>
     <ul>
-      ${recette.ingredients.map(i => `<li>${i}</li>`).join('') || '<li>À remplir</li>'}
+      ${recette.ingredients?.map(i => `<li>${i}</li>`).join('') || '<li>À remplir</li>'}
     </ul>
     <h3>Étapes</h3>
     <p>${recette.etapes || 'À venir...'}</p>
   `;
 
-  // Pareil pour ton cahier si tu veux afficher "à_acheter"
   const moncontenu = document.getElementById('moncontenu');
   if (moncontenu) {
     moncontenu.innerHTML = `
       <h3>À acheter</h3>
       <ul>
-        ${recette.a_acheter.map(i => `<li>${i}</li>`).join('') || '<li>À compléter</li>'}
+        ${recette.a_acheter?.map(i => `<li>${i}</li>`).join('') || '<li>À compléter</li>'}
       </ul>
     `;
   }
