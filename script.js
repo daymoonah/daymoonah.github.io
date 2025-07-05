@@ -18,10 +18,6 @@ fetch('recette.json')
     liste.appendChild(item);
   });
 
-  .catch(error => {
-    console.error("Erreur lors du chargement du JSON :", error);
-  });
-
   function afficherRecette(recette) {
   const takleau = document.getElementById('takleau');
   takleau.innerHTML = `
