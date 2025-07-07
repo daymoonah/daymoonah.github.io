@@ -1,0 +1,122 @@
+{
+  "pates": {
+    "nom_affiche": "Pâtes",
+    "unite": "g",
+    "calories_par_100g": 350,
+    "prix_marques": {
+      "simply": {
+        "prix_kg": 1.28,
+        "disponible": true
+      },
+      "classic": {
+        "prix_kg": 1.35,
+        "disponible": true
+      },
+      "eco_plus": {
+        "prix_kg": 1.17,
+        "disponible": true
+      },
+      "marque_repere": {
+        "prix_kg": 1.49,
+        "disponible": true
+      },
+      "top_budget": {
+        "prix_kg": 1.19,
+        "disponible": true
+      },
+      "fiorini": {
+        "prix_kg": 1.34,
+        "disponible": true
+      }
+    }
+  }
+}
+
+{
+  "oignons" : {
+    "nom_affiche": "Oignon",
+    "unite" : "g",
+    "calories_par_100g" : 40,
+    "prix_marques": {
+      "carrefour": {
+        "prix_kg": 1.98,
+        "disponible" : true
+      },
+      "leclerc": {
+        "prix_kg": 1.99,
+        "disponible" : true
+
+      },
+      "intermarche": {
+        "prix_kg": 1.69,
+        "disponible" : true
+      }
+
+    }
+  }
+}
+
+{
+  "bacon_allumettes": {
+    "nom_affiche": "Allumette de bacon",
+    "unite" : "g",
+    "calories_par_100g" : 106,
+    "prix_marques": {
+      "classic" : {
+        "prix_barquette" : 1.99,
+        "disponible" : true
+      },
+      "marque_repere" : {
+        "prix_barquette" : 1.74,
+        "disponible" : true
+      },
+      "intermarche" : {
+        "prix_barquette" : 1.73,
+      }
+    }
+  }
+}
+
+{
+  "champignons_paris": {
+    "nom_affiche": "Champignon de paris",
+    "unite" : "g",
+    "calories_par_100g" : 22,
+    "prix_marques": {
+      "intermarche" : {
+        "prix_barquette" : 0.99,
+        "disponible" : true
+      },
+      "leclerc" : {
+        "prix_barquette" : 0.95,
+        "disponible" : true
+      },
+      "carrefour " : {
+      "prix_barquette" : 1.00,
+      "disponible" : true
+      },
+    }
+  }
+}
+
+{
+  "poireaux": {
+    "nom_affiche" : "poireaux",
+    "unite" : "piece",
+    "calories_par_100g" : 61,
+    "prix_marques" : {
+        "intermarche" : {
+          "prix_piece" : 1.00,
+          "disponible" : true
+        },
+        "carrefour" : {
+          "prix_piece" : 1.00,
+          "disponible" : true
+        },
+        "leclerc": {
+          "prix_piece" : 1.00, 
+          "disponible" : true,
+      }
+    }
+  }
+}
