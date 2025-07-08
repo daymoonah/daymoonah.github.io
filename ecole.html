@@ -29,7 +29,8 @@
 	
 	<div>
 		<h2>Bienvenue dans la gestion de ton école !</h2>
-			<form id="setup-form">
+		<!--Ici c'est le formulaire pour choisir le nom de prof et le nom d'école-->
+			<form id="setup-form"> 
 			  <label for="nom_maitre">Ton nom :</label>
 			  <input type="text" id="nom_maitre" required><br><br>
 
@@ -60,14 +61,11 @@
 	<!-- Écran 2 : choix des élèves -->
 	<div id="zone-choix-eleves" class="ecran" style="display: none;">
 	  	<h2>A présent, il est temps de choisir les élèves de ta classe</h2>
-	 	<div id="sac-eleves">
-
-	    <!-- Ici on générera les petits ronds avec JS -->
-	 	</div>
-	 	<div id="tooltip"></div>
-	 	<div id="info-eleve" style="border:1px solid #ccc; padding:10px; width:250px; min-height:150px;">
-  		<p><em>Survole ou clique sur un élève pour voir ses infos ici.</em></p>
-		</div>
+	 	<div id="sac-eleves"><!--ici le rond grille--></div>
+	 		<div id="info-eleve">
+	 			<button onclick="reinitialiserInfosEleve()">Désélectionner</button>
+    			<p><em>Survole ou clique sur un élève pour voir ses infos ici.</em></p>
+ 			</div>
 	</div>
 
 	<div id="classe-container" style="display: none;">

@@ -1,3 +1,5 @@
+let eleveSelectionne = null;
+
 // Quand le formulaire "setup-form" est soumis (le joueur clique sur "Commencer l'aventure")
 document.getElementById("setup-form").addEventListener("submit", function(e) {
   
@@ -35,6 +37,10 @@ document.getElementById("setup-form").addEventListener("submit", function(e) {
 
 //############################################################################
 
+
+
+//############################################################################
+
 // Quand tout le contenu HTML est chargé (DOM prêt), on exécute cette fonction
 window.addEventListener("DOMContentLoaded", () => {
   const maitre = localStorage.getItem("nommaitre");
@@ -49,22 +55,28 @@ window.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // ✅ On a les données → afficher profil
+   // Profil déjà rempli → on affiche les infos
   afficherNoteProfil(maitre, ecole);
   document.getElementById("setup-form").style.display = "none";
 
-  // ⏳ Gérer l'état du jeu
+   // Selon l'état du jeu, on affiche ce qu'il faut
   if (etat === "setup") {
-    afficherBienvenue(true); // Affiche "Bienvenue, ..."
+    //affiche l'écran de bienvenue
+    afficherBienvenue(true);
   } else if (etat === "choixEleves") {
+    //cache l'écran de bienvenue
     afficherBienvenue(false);
+
+    //affiche la zone de choix des eleves
     document.getElementById("zone-choix-eleves").style.display = "block";
-    placerEleves(30);
+   // genererGrilleDansCercle(); // ou placerElevesDansCercle() selon ce que tu veux
+    afficherElevesDansGrilleCercle();
   } else if (etat === "jeu") {
+    //affiche la classe
     document.getElementById("classe-container").style.display = "block";
-    genererGrilleClasse();
+    genererGrilleClasse(); // ou autre selon ce que tu veux montrer ici
   } else {
-    afficherBienvenue(false); // Affiche "Bon retour, ..."
+    afficherBienvenue(false);
   }
 });
 
@@ -96,8 +108,15 @@ function afficherBienvenue(debut = true) {
 document.getElementById("btn-suite").addEventListener("click", () => {
   // on passe au choix élèves
   localStorage.setItem("etatJeu", "choixEleves");
+
+  //cache l'écran de bienvenue
   document.getElementById("ecran-bienvenue").style.display = "none";
+
+  //affiche l'écran de choix des élèves
   document.getElementById("zone-choix-eleves").style.display = "block";
+
+  afficherGrilleCercle();
+  afficherElevesDansGrilleCercle();
 });
 
 
@@ -112,7 +131,6 @@ function afficherNoteProfil(nommaitre, nomecole) {
   document.getElementById("reset-button").style.display = "inline-block";
 }
 
-
 //############################################################################
 
 document.getElementById("reset-button").addEventListener("click", () => {
@@ -126,16 +144,8 @@ document.getElementById("reset-button").addEventListener("click", () => {
 });
 
 //############################################################################
-
-document.getElementById("btn-suite").addEventListener("click", () => {
-  // Quand on clique sur "passer à la suite", on affiche la zone pour choisir les élèves
-    document.getElementById("ecran-bienvenue").style.display = "none";
-    document.getElementById("zone-choix-eleves").style.display = "block";
-});
-
-//############################################################################
-
 // Fonction qui génère la grille de la classe (un tableau de cases 10 colonnes x 20 lignes)
+
 function genererGrilleClasse() {
   const grille = document.getElementById("grille-classe");
   grille.innerHTML = ''; // On vide le contenu précédent, si il y en avait un
@@ -150,24 +160,6 @@ function genererGrilleClasse() {
 }
 
 //############################################################################
-
-// Dès que la page est complètement chargée (DOM prêt)
-window.addEventListener("DOMContentLoaded", () => {
-  // Récupération des infos du maître et de l'école depuis le localStorage (si déjà enregistrées)
-  const maitre = localStorage.getItem("nommaitre");
-  const ecole = localStorage.getItem("nomecole");
-
-  // Si on a bien ces deux infos (donc que le joueur a déjà rempli le formulaire)
-  if (maitre && ecole) {
-    // Par contre on affiche la zone de confirmation/bienvenue
-    document.getElementById("ecran-bienvenue").style.display = "block";
-    // On génère la grille de la classe pour que le joueur puisse voir ou interagir avec
-    genererGrilleClasse();
-  }
-});
-
-//############################################################################
-
 
 function resetGrille() {
     //pour chaque case du tableau généré
@@ -314,7 +306,15 @@ const couleursFilles = [
   "#FFDAB9", // pêche
   "#FFE4E1", // rose très pâle
   "#FF69B4", // rose vif (répété mais ça va)
-  "#FF7F50"  // corail
+  "#FF7F50",  // corail
+  "#a63d82", 
+  "#c31610", 
+  "#ec5544", 
+  "#ee670b",
+  "#ed9f0f",
+  "#edb613",
+  "#efc755", 
+  "#edb664", 
 ];
 
 const couleursGarcons = [
@@ -337,17 +337,27 @@ const couleursGarcons = [
   "#ADFF2F", // green yellow
   "#008080", // teal (répété)
   "#20B2AA", // light sea green
-  "#2E8B57"  // sea green
+  "#2E8B57",  // sea green
+  "#0b2771",
+  "#2258b2", 
+  "#20205e", 
+  "#0e5068",
 ];
 
 
 //############################################################################
 
 //Liste des prénoms séparés par genre
-const prenomsGarcons = ["Léo", "Noah", "Hugo", "Lucas", "Enzo"];
-const prenomsFilles = ["Emma", "Jade", "Lina", "Chloé", "Camille"];
+const prenomsGarcons = ["Léo", "Noah", "Hugo", "Lucas", "Enzo", "Gabriel", "Raphael", "Louis", "Maël", "Jules", "Adam"];
+const prenomsFilles = ["Emma", "Jade", "Lina", "Chloé", "Camille", "Anna", "Tina", "Nina", "Lya", "Julie", "Alexandra", "Manon"];
 const qualites = ["curieux", "sociable", "créatif", "gentil", "patient", "dynamique"];
 const defauts = ["timide", "discret", "désordonné", "impatient", "rêveur", "têtu"];
+
+//############################################################################
+//#
+//#_____________________Ici on garde
+//#
+//############################################################################
 
 function genererTraits(arr, nombre) {
 
@@ -358,6 +368,8 @@ function genererTraits(arr, nombre) {
   }
   return resultat;
 }
+
+//############################################################################
 
 function genererEleve() {
   const genres = ["m", "f"];
@@ -393,6 +405,8 @@ function genererEleve() {
   };
 }
 
+//############################################################################
+
 function genererDateNaissance() {
   const annee = rand(2011, 2017);
   const mois = rand(1, 12);
@@ -400,9 +414,17 @@ function genererDateNaissance() {
   return `${jour}/${mois}/${annee}`;
 }
 
+//############################################################################
+
 function rand(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+//############################################################################
+//#
+//#_____________________jusque la
+//#
+//############################################################################
 
 function afficherInfosEleve(eleve) {
   const zone = document.getElementById("info-eleve");
@@ -410,7 +432,7 @@ function afficherInfosEleve(eleve) {
   const qualites = Array.isArray(eleve.qualites) ? eleve.qualites.join(", ") : "Aucune";
   const defauts = Array.isArray(eleve.defauts) ? eleve.defauts.join(", ") : "Aucun";
   
-  console.log(eleve)
+  //console.log(eleve)
 
    zone.innerHTML = `
     <h3 style="color: ${eleve.couleur}; margin:0">${eleve.prenom} (${eleve.genre === "m" ? "Garçon" : "Fille"})</h3>
@@ -424,75 +446,215 @@ function afficherInfosEleve(eleve) {
        Langues : ${eleve.niveau.langues}</p>
     <p><strong>Qualités :</strong> ${qualites}</p>
     <p><strong>Défauts :</strong> ${defauts}</p>
+    <button id="btn-deselection">Désélectionner</button>
   `;
+
+  document.getElementById("btn-deselection").addEventListener("click", () => {
+    eleveSelectionne = null;
+    zone.innerHTML = `<p><em>Survole ou clique sur un élève pour voir ses infos ici.</em></p>`;
+  });
 }
 
-function placerEleves(nombre = 30) {
-  console.log("placerEleves appelé avec nombre =", nombre);
-  const sac = document.getElementById("sac-eleves");
-  sac.innerHTML = "";
+//############################################################################
 
-  const conteneur = document.getElementById("sac-container");
+function genererGrilleDansCercle(nbLignes = 8, nbColonnes = 8) {
+  const tailleCase = 40;
+  const rayon = (Math.min(nbLignes, nbColonnes) * tailleCase) / 2;
+  const centre = {
+    x: (nbColonnes * tailleCase) / 2,
+    y: (nbLignes * tailleCase) / 2
+  };
 
-  for (let i = 0; i < nombre; i++) {
-    const eleve = genererEleve();
+  const container = document.getElementById("sac-eleves");
+  container.innerHTML = "";
 
-    const div = document.createElement("div");
-    div.className = "eleve-rond";
-    div.style.backgroundColor = eleve.couleur;
+  for (let y = 0; y < nbLignes; y++) {
+    for (let x = 0; x < nbColonnes; x++) {
+      const posX = x * tailleCase;
+      const posY = y * tailleCase;
 
-    div.title = `${eleve.prenom} (${eleve.genre === "m" ? "Garçon" : "Fille"})`;
+      const distance = Math.sqrt(
+        Math.pow(posX + tailleCase / 2 - centre.x, 2) +
+        Math.pow(posY + tailleCase / 2 - centre.y, 2)
+      );
 
-     // Positionnement aléatoire dans le sac (pour le fun)
-    const angle = Math.random() * 2 * Math.PI;
-    const rayon = Math.random() * 260;
-    const x = Math.cos(angle) * rayon + 300 - 15;
-    const y = Math.sin(angle) * rayon + 300 - 15;
+      const caseDiv = document.createElement("div");
+      caseDiv.className = "cell-cercle";
 
-    div.style.left = `${x}px`;
-    div.style.top = `${y}px`;
+      if (distance <= rayon) {
+        const eleve = initEleves();
 
-    // Survol : affiche infos
-    div.addEventListener("mouseenter", () => {
-      afficherInfosEleve(eleve);
-    });
+        const eleveDiv = document.createElement("div");
+        eleveDiv.className = "eleve-rond";
+        eleveDiv.style.backgroundColor = eleve.couleur;
+        eleveDiv.textContent = eleve.prenom[0].toUpperCase();
 
-    // Click : affiche infos (reste affiché)
-    div.addEventListener("click", () => {
-      afficherInfosEleve(eleve);
-    });
+        // Hover/click
+        eleveDiv.addEventListener("mouseenter", () => {
+          if (!eleveSelectionne) {
+            afficherInfosEleve(eleve);
+          }
+        });
+        
+        eleveDiv.addEventListener("mouseleave", () => {
+          if (!eleveSelectionne) {
+            document.getElementById("info-eleve").innerHTML =
+            `<p><em>Survole ou clique sur un élève pour voir ses infos ici.</em></p>`;
+          }
+        });
 
-     // Optionnel : si tu veux cacher les infos quand tu sors le curseur
-    div.addEventListener("mouseleave", () => {
-      // zone d'info vide ou message
-      const zone = document.getElementById("info-eleve");
-      zone.innerHTML = `<p><em>Survole ou clique sur un élève pour voir ses infos ici.</em></p>`;
-    });
+        eleveDiv.addEventListener("click", () => {
+          eleveSelectionne = eleve;
+          afficherInfosEleve(eleve);
 
-    // Tooltip avec infos
-    div.addEventListener("mouseenter", e => {
-      const tooltip = document.getElementById("tooltip");
-      tooltip.innerHTML = `
-        <strong>${eleve.prenom}</strong><br>
-        Né(e) le ${eleve.dateNaissance}<br>
-        Maths : ${eleve.niveau.maths}<br>
-        Français : ${eleve.niveau.francais}<br>
-        Histoire : ${eleve.niveau.histoiregeo}<br>
-        Sciences : ${eleve.niveau.sciences}<br>
-        Sport : ${eleve.niveau.sport}<br>
-        Langues : ${eleve.niveau.langues}<br>
-        Qualités : ${eleve.qualites.join(", ")}<br>
-        Défauts : ${eleve.defauts.join(", ")}
-      `;
-      tooltip.style.display = "block";
-      tooltip.style.left = e.pageX + 15 + "px";
-      tooltip.style.top = e.pageY + 15 + "px";
-    });
+        });
 
-    div.addEventListener("mouseleave", () => {
-      document.getElementById("tooltip").style.display = "none";
-    });
+        caseDiv.appendChild(eleveDiv);
+      }
 
-    sac.appendChild(div);
+      container.appendChild(caseDiv);
+    }
   }
+}
+
+//############################################################################
+
+function afficherGrilleCercle(nbLignes = 10, nbColonnes = 10) {
+  const tailleCase = 40;
+  const rayon = (Math.min(nbLignes, nbColonnes) * tailleCase) / 2;
+  const centre = {
+    x: (nbColonnes * tailleCase) / 2,
+    y: (nbLignes * tailleCase) / 2
+  };
+
+  const container = document.getElementById("sac-eleves");
+  container.innerHTML = "";
+  container.style.position = "relative";
+  container.style.width = nbColonnes * tailleCase + "px";
+  container.style.height = nbLignes * tailleCase + "px";
+
+  for (let y = 0; y < nbLignes; y++) {
+    for (let x = 0; x < nbColonnes; x++) {
+      const posX = x * tailleCase;
+      const posY = y * tailleCase;
+
+      const distance = Math.sqrt(
+        Math.pow(posX + tailleCase / 2 - centre.x, 2) +
+        Math.pow(posY + tailleCase / 2 - centre.y, 2)
+      );
+
+      if (distance <= rayon) {
+        const caseDiv = document.createElement("div");
+        caseDiv.className = "cell-cercle";
+        caseDiv.style.width = tailleCase + "px";
+        caseDiv.style.height = tailleCase + "px";
+        caseDiv.style.position = "absolute";
+        caseDiv.style.left = posX + "px";
+        caseDiv.style.top = posY + "px";
+
+        container.appendChild(caseDiv);
+      }
+    }
+  }
+}
+
+function afficherElevesDansGrilleCercle(nbLignes = 10, nbColonnes = 10) {
+  const tailleCase = 40;
+  const rayon = (Math.min(nbLignes, nbColonnes) * tailleCase) / 2;
+  const centre = {
+    x: (nbColonnes * tailleCase) / 2,
+    y: (nbLignes * tailleCase) / 2
+  };
+
+  const container = document.getElementById("sac-eleves");
+  container.innerHTML = ""; // Vide la zone
+
+  for(let y=0; y < nbLignes; y++) {
+    for(let x=0; x < nbColonnes; x++) {
+      const posX = x * tailleCase;
+      const posY = y * tailleCase;
+      const distance = Math.sqrt(
+        Math.pow(posX + tailleCase/2 - centre.x, 2) +
+        Math.pow(posY + tailleCase/2 - centre.y, 2)
+      );
+
+      /*console.log("Ajout d'un élève à ", x, y);*/
+
+      const caseDiv = document.createElement("div");
+      caseDiv.className = "cell-cercle";
+      caseDiv.style.position = 'absolute';
+      caseDiv.style.width = tailleCase + "px";
+      caseDiv.style.height = tailleCase + "px";
+      caseDiv.style.left = posX + "px";
+      caseDiv.style.top = posY + "px";
+
+      if(distance <= rayon) {
+        const eleve = genererEleve();
+
+        const eleveDiv = document.createElement("div");
+        eleveDiv.className = "eleve-rond";
+        eleveDiv.style.backgroundColor = eleve.couleur;
+        eleveDiv.textContent = eleve.prenom[0].toUpperCase();
+
+        // Hover + click pour infos
+        eleveDiv.addEventListener("mouseenter", () => {
+  if (!eleveSelectionne) {
+    afficherInfosEleve(eleve);
+  }
+});
+
+eleveDiv.addEventListener("mouseleave", () => {
+  if (!eleveSelectionne) {
+    document.getElementById("info-eleve").innerHTML =
+      `<p><em>Survole ou clique sur un élève pour voir ses infos ici.</em></p>`;
+  }
+});
+
+eleveDiv.addEventListener("click", () => {
+  eleveSelectionne = eleve;
+  afficherInfosEleve(eleve);
+});
+
+        caseDiv.appendChild(eleveDiv);
+      } else {
+        caseDiv.style.display = 'none';
+      }
+
+      container.appendChild(caseDiv);
+    }
+  }
+}
+
+function reinitialiserInfosEleve() {
+  eleveSelectionne = null;
+  document.getElementById("info-eleve").innerHTML =
+    `<p><em>Survole ou clique sur un élève pour voir ses infos ici.</em></p>`;
+}
+
+// Récupérer la liste des élèves du localStorage (le post-it)
+function recupererEleves() {
+  const elevesString = localStorage.getItem("eleves");
+  if (elevesString) {
+    return JSON.parse(elevesString); // Transforme la chaîne en tableau d'objets élèves
+  }
+  return null; // Rien trouvé
+}
+
+// Générer la liste des élèves ET la stocker dans localStorage
+function genererEtStockerEleves() {
+  const eleves = [];
+  for (let i = 0; i < 20; i++) {  // Par exemple 20 élèves
+    eleves.push(genererEleve()); // Ta fonction qui crée un élève
+  }
+  localStorage.setItem("eleves", JSON.stringify(eleves)); // Sauvegarde au format texte
+  return eleves;
+}
+
+// Fonction d'initialisation à appeler au démarrage
+function initEleves() {
+  let eleves = recupererEleves(); // Essaie de prendre la liste stockée
+  if (!eleves) { // Si elle n'existe pas
+    eleves = genererEtStockerEleves(); // Génère et stocke
+  }
+  return eleves; // Retourne la liste pour l’utiliser
 }
